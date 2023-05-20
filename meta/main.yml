@@ -15,9 +15,6 @@ galaxy_info:
     - name: OracleLinux
       versions:
         - all
-    - name: Oracle
-      versions:
-        - all
     - name: Fedora
       versions:
         - all
@@ -32,4 +29,3 @@ galaxy_info:
     - security
 
 dependencies: []
-
