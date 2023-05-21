@@ -1,18 +1,17 @@
 ---
-- name: Load OS specific variables
+- name: Load family vars
   ansible.builtin.include_vars: "vars/{{ ansible_os_family }}.yml"
 
-- name: Create OS based known groups list
+- name: Create family based known groups list
   ansible.builtin.set_fact:
     known_groups: "{{ known_common_groups }}"
 
-- name: Load host or host group variables
+- name: Load host, hostgroup vars
   ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
-    - files:
-        - "vars/hostname={{ inventory_hostname }}.yml"
-        - "vars/hostgroup={{ host_group }}.yml"
-      skip: true
+    - "vars/hostname={{ inventory_hostname }}.yml"
+    - "vars/hostgroup={{ hostgroup }}.yml"
+    - "vars/default.yml"
 
 - name: Check existance of hostname variables
   ansible.builtin.stat:
@@ -43,10 +42,11 @@
     msg: "All known groups: {{ known_groups }}"
 
 - name: Find from /etc/group groups with gid >= {{ min_gid }}
-  ansible.builtin.shell: "awk -F':' '{ if ($3 >= {{ min_gid }}) print $1 }' /etc/group"
+  ansible.builtin.command:
+    "awk -F':' '{ if ($3 >= {{ min_gid }}) print $1 }' /etc/group"
   changed_when: false
   register: result
-  check_mode: false # force read-only task to run, even playbook uses --check
+  check_mode: false # force to run in check mode
 
 - name: Show discovered local groups and ones to remove
   ansible.builtin.debug:
@@ -63,5 +63,4 @@
         local_group_to_remove: "{{ item }}"
   with_items: "{{ result.stdout_lines | difference(known_groups) }}"
   when: "result.stdout_lines | difference(known_groups) | length > 0"
-
 ...

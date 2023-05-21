@@ -41,5 +41,4 @@
         - local_group_gid: "{{ item.gid }}"
   with_items: "{{ managed_groups }}" # list of hashes
   when: "managed_groups | length > 0"
-
 ...

@@ -21,6 +21,12 @@ galaxy_info:
     - name: Solaris
       versions:
         - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
 
   galaxy_tags:
     - system

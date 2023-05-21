@@ -9,5 +9,4 @@
 
 - name: Manage groups
   ansible.builtin.include_tasks: manage_groups.yml
-
 ...

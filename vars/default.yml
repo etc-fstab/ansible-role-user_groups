@@ -1,0 +1,7 @@
+---
+# default if there is no host or hostgroup cfg,
+# which is basically empty
+min_gid: 1000
+known_host_groups: []
+managed_host_groups: []
+...

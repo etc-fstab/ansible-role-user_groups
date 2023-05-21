@@ -1,0 +1,12 @@
+---
+min_gid: 1000
+
+# Common user groups for Debian family
+known_common_groups:
+  - nobody
+  - nfsnobody
+
+# Your user groups to manage for Debian family
+managed_common_groups: []
+
+...

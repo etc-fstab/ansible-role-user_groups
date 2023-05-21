@@ -2,6 +2,9 @@ The test.yml playbook can be used to test this role from within the role.
 
 1. Check inventory file so it meets your need. Test host is member of 'test' host group. 
 
-2. Run:
-$ ansible-playbook -i inventory test.yml
+2. Run to check:
+$ ansible-playbook -i inventory test.yml --diff --check
+
+3. Run to implement:
+$ ansible-playbook -i inventory test.yml --diff 
 
